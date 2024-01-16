@@ -1,9 +1,15 @@
+<template>
+  <div class="home-content">
+    <h1>Welcome to Heist.net!</h1>
+  </div>
+</template>
+
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+
 </script>
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
+<style>
+.home-content {
+  margin: 5rem;
+}
+</style>
