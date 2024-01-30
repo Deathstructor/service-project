@@ -1,8 +1,10 @@
 @import "./base.css";
+
 @font-face {
   font-family: Padaloma;
   src: url("../assets/fonts/Padaloma.ttf");
 }
+
 /* #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -12,10 +14,17 @@
 
 a {
   text-decoration: none;
-  color: rgb(0, 150, 255);
+  color: var(--hn-blue-dark);
   transition: 0.4s;
   padding: 0 3px;
   font-size: x-large;
+}
+
+.page-title {
+  margin-top: 5rem;
+  font-family: Padaloma;
+  font-size: 3em;
+  color: rgb(0, 100, 200);
 }
 
 /* @media (hover: hover) {

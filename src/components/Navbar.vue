@@ -2,7 +2,7 @@
     <nav>
         <img id="heistnet-logo-nav" src="../assets/images/heistnet-logo-nav.svg" alt="Heist.net logo">
         <router-link v-for="content in links" :to="{ name: content.name }">
-            <h3>{{ content.title }}</h3>
+            <h3 id="nav-title">{{ content.title }}</h3>
         </router-link>
     </nav>
 </template>
@@ -30,7 +30,7 @@ nav {
     align-items: center;
 }
 
-h3 {
+#nav-title {
     font-family: Padaloma;
     font-size: 1em;
     padding: 0 0.3em;
@@ -38,9 +38,9 @@ h3 {
     transition: all ease-in-out 250ms;
 }
 
-h3:hover {
+#nav-title:hover {
     box-shadow: inset 0.1em 0.1em 0.2em #000;
     text-shadow: 0.1em 0.1em 0.1em #111;
-    color: rgb(0, 200, 255);
+    color: var(--hn-blue-light);
 }
 </style>
