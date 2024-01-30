@@ -12,12 +12,16 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 5rem;
+  padding: 6rem;
   display: flex;
   align-items: center;
   flex-direction: column;
   animation: fadeInAnim ease 2s;
   text-shadow: 0 0 10px #222;
+}
+
+.home-content h1 {
+  color: var(--hn-white);
 }
 
 @keyframes fadeInAnim {
@@ -28,7 +32,7 @@
 
   100% {
     opacity: 1;
-    padding-top: 0%;
+    padding-top: 6rem;
   }
 }
 

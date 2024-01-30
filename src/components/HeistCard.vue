@@ -41,7 +41,7 @@ returnName()
         </div>
     </div>
     <div v-else>
-        <h1>Loading...</h1>
+        <h1 class="page-title">Loading...</h1>
     </div>
 </template>
 
