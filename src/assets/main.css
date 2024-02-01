@@ -5,6 +5,11 @@
   src: url("../assets/fonts/Padaloma.ttf");
 }
 
+@font-face {
+  font-family: Lexend;
+  src: url("../assets/fonts/Lexend.ttf");
+}
+
 a {
   text-decoration: none;
   color: var(--hn-blue-dark);

@@ -5,7 +5,9 @@ import HeistCard from '@/components/HeistCard.vue';
 <template>
     <div class="heist-content">
         <h1 class="page-title" id="h-title">Heists</h1>
-        <HeistCard />
+        <div >
+            <HeistCard />
+        </div>
     </div>
 </template>
 
