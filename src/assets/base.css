@@ -1,9 +1,12 @@
-/* color palette from <https://github.com/vuejs/theme> */
 :root {
   --hn-white: rgb(225, 235, 255);
 
+  --hn-green: rgb(100, 205, 125);
+
   --hn-blue-light: rgb(0, 200, 255);
   --hn-blue-dark: rgb(0, 150, 255);
+
+  --hn-blue-faded: rgba(135, 200, 235, 0.6);
 }
 
 *,

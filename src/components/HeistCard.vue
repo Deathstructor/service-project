@@ -1,6 +1,6 @@
 <script setup>
 import { MongoClient } from 'mongodb';
-import { ref, toRaw } from 'vue'
+import { ref, toRaw, defineProps } from 'vue'
 
 const uri = "mongodb+srv://chastainpaul:uqja15ElJY5hRZSf@heistnetdb.gtpzx.mongodb.net/HeistnetDB?retryWrites=true&w=majority";
 
@@ -8,7 +8,7 @@ const client = new MongoClient(uri)
 const database = client.db("HeistnetDB")
 const collection = database.collection("heists")
 
-async function GetName() {
+async function GetData() {
     const matchCursor = await collection.find()
 
     const ret = [];
@@ -20,14 +20,22 @@ async function GetName() {
 }
 
 const heists = ref(null);
-const returnName = async () => heists.value = toRaw(await GetName())
-returnName()
+const returnData = async () => heists.value = toRaw(await GetData())
+returnData()
 
+const props = defineProps(['filterDifficulty', 'filterTactic'])
+
+function filterFunc(h) {
+    return (
+        h.difficulty == ((props.filterDifficulty == "ALL" || props.filterDifficulty == "") ? h.difficulty : props.filterDifficulty) &&
+        h.tactic == ((props.filterTactic == "All" || props.filterTactic == "") ? h.tactic : props.filterTactic)
+    );
+}
 </script>
 
 <template>
     <div v-if="heists" class="heist-card-alignment">
-        <article v-for="item in heists" class="heist-card">
+        <article v-for="item in heists.filter(filterFunc)" class="heist-card" >
             <h1 id="heist-name">{{ item.name }}</h1>
             <main class="heist-card-content">
                 <section>

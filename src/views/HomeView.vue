@@ -11,7 +11,7 @@
   background: linear-gradient(180deg, rgba(0,0,40,1) 0%, rgba(0,100,200,1) 100%);
   position: absolute;
   width: 100%;
-  height: 100%;
+  min-height: 88.75vh;
   padding: 6rem;
   display: flex;
   align-items: center;
