@@ -16,32 +16,35 @@ async function GetData() {
         ret.push(heist)
     }
 
+    client.close()
     return ret;
 }
-
 const heists = ref(null);
-const returnData = async () => heists.value = toRaw(await GetData())
-returnData()
+const returnData = async () => heists.value = toRaw(await GetData());
+returnData();
 
-const props = defineProps(['filterDifficulty', 'filterTactic'])
+const props = defineProps(['filterDifficulty', 'filterTactic']);
 
-function filterFunc(h) {
+function filterFunc(h) {    
     return (
-        h.difficulty == ((props.filterDifficulty == "ALL" || props.filterDifficulty == "") ? h.difficulty : props.filterDifficulty) &&
-        h.tactic == ((props.filterTactic == "All" || props.filterTactic == "") ? h.tactic : props.filterTactic)
+        h.difficulty == (["ALL", ""].includes(props.filterDifficulty) ? h.difficulty : props.filterDifficulty) &&
+        h.tactic == (["ALL", ""].includes(props.filterTactic) ? h.tactic : props.filterTactic)
     );
 }
+
 </script>
 
 <template>
     <div v-if="heists" class="heist-card-alignment">
-        <article v-for="item in heists.filter(filterFunc)" class="heist-card" >
+        <article v-for="item in heists.filter(filterFunc)" class="heist-card">
             <h1 id="heist-name">{{ item.name }}</h1>
             <main class="heist-card-content">
+
                 <section>
                     <h3 class="heist-sub-titles">Difficulty: {{ item.difficulty }}</h3>
                     <h3 class="heist-sub-titles">Tactic: {{ item.tactic }}</h3>
                 </section>
+
                 <aside>
                     <h2>Jobs:</h2>
                     <div class="heist-job-container">
@@ -62,7 +65,7 @@ function filterFunc(h) {
 
 <style>
 .heist-card {
-    background-color: var(--hn-blue-dark);
+    background: radial-gradient(circle, var(--hn-blue-faded) 0%, var(--hn-blue-dark) 90%);
     color: white;
     margin: 2rem 1em;
     padding: 2em;

@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import AccountView from '../views/AccountView.vue'
 import HeistView from '../views/HeistView.vue'
+import HeistCreateViewVue from '../views/HeistCreateView.vue'
 
 
 const router = createRouter({
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/heists',
       name: 'heists',
       component: HeistView
+    },
+    {
+      path: '/heists/create',
+      name: 'createHeist',
+      component: HeistCreateViewVue
     }
   ]
 })

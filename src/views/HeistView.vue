@@ -1,20 +1,14 @@
 <script setup>
 import HeistCard from '@/components/HeistCard.vue';
-import router from '@/router';
 import { ref } from 'vue';
 import Select from '@/components/Select.vue';
 
-
-function heistCreate() {
-    router.push('/heists/create')
-}
-
 const optsTact = [
     { val: "", text: "-- Tactics --", disabled: true, selected: true },
-    { val: "All", text: "All Tactics", },
-    { val: "Any", text: "Any" },
-    { val: "Loud", text: "Loud" },
-    { val: "Stealth", text: "Stealth" }
+    { val: "ALL", text: "All Tactics", },
+    { val: "ANY", text: "Any" },
+    { val: "LOUD", text: "Loud" },
+    { val: "STEALTH", text: "Stealth" }
 ]
 let filterTactic = ref("");
 
@@ -45,7 +39,7 @@ let filterDifficulty = ref("");
                 @did-change="(val) => { filterDifficulty = val; console.log(val) }">
             </Select>
 
-            <button id="heist-create" @click="heistCreate()">Create Heist</button>
+            <router-link to="/heists/create" tag="button" id="heist-create">Create Heist</router-link>
         </div>
         <HeistCard :filterTactic="filterTactic" :filterDifficulty="filterDifficulty" />
     </div>
