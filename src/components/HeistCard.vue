@@ -17,7 +17,6 @@ async function GetData() {
         ret.push(heist);
     }
 
-    client.close();
     return ret;
 }
 
@@ -25,7 +24,7 @@ const heists = ref(null);
 const returnData = async () => heists.value = toRaw(await GetData());
 returnData();
 
-setInterval(() => {
+setInterval(async () => {
     returnData();
 }, 1000);
 
@@ -46,15 +45,12 @@ async function takeJob(job, id) {
         .set("Explosives Expert", 3)
         .set("Insider", 4)
 
-    await client.connect(uri)
     console.log(id);
     console.log(job.job_title);
     console.log(job.available);
     let findHeist = await collection.findOne({ id: id });
     findHeist.job[jobIndex.get(job.job_title)].available = "No";
     await collection.findOneAndUpdate({id: id}, { $set: findHeist });
-    client.close();
-    // location.reload();
 }
 </script>
 
