@@ -1,27 +1,33 @@
 <script setup>
 import { MongoClient } from 'mongodb';
-import { ref, toRaw, defineProps } from 'vue'
+import { ref, toRaw, defineProps } from 'vue';
 
 const uri = "mongodb+srv://chastainpaul:uqja15ElJY5hRZSf@heistnetdb.gtpzx.mongodb.net/HeistnetDB?retryWrites=true&w=majority";
 
-const client = new MongoClient(uri)
-const database = client.db("HeistnetDB")
-const collection = database.collection("heists")
+const client = new MongoClient(uri);
+const database = client.db("HeistnetDB");
+const collection = database.collection("heists");
 
 async function GetData() {
-    const matchCursor = await collection.find()
+    await client.connect(uri)
+    const matchCursor = await collection.find();
 
     const ret = [];
     for await (let heist of matchCursor) {
-        ret.push(heist)
+        ret.push(heist);
     }
 
-    client.close()
+    client.close();
     return ret;
 }
+
 const heists = ref(null);
 const returnData = async () => heists.value = toRaw(await GetData());
 returnData();
+
+setInterval(() => {
+    returnData();
+}, 1000);
 
 const props = defineProps(['filterDifficulty', 'filterTactic']);
 
@@ -32,6 +38,24 @@ function filterFunc(h) {
     );
 }
 
+async function takeJob(job, id) {
+    let jobIndex = new Map()
+        .set("Escape Driver", 0)
+        .set("Hacker", 1)
+        .set("Crowd Control", 2)
+        .set("Explosives Expert", 3)
+        .set("Insider", 4)
+
+    await client.connect(uri)
+    console.log(id);
+    console.log(job.job_title);
+    console.log(job.available);
+    let findHeist = await collection.findOne({ id: id });
+    findHeist.job[jobIndex.get(job.job_title)].available = "No";
+    await collection.findOneAndUpdate({id: id}, { $set: findHeist });
+    client.close();
+    // location.reload();
+}
 </script>
 
 <template>
@@ -51,6 +75,8 @@ function filterFunc(h) {
                         <div v-for="job in item.job" class="heist-job-info">
                             <h4>{{ job.job_title }}</h4>
                             <h4>Available: {{ job.available }}</h4>
+                            <button class="take-job-button" v-if="job.available == 'Yes'" @click="takeJob(job, item.id)">Take job</button>
+                            <button class="take-job-button" v-else disabled>Take job</button>
                         </div>
                     </div>
                 </aside>
@@ -114,5 +140,12 @@ aside h2 {
 section {
     display: flex;
     gap: 10%;
+}
+
+.take-job-button {
+    border-radius: 20px;
+    font-family: Lexend;
+    padding: 0.3em 0.7em;
+    margin-top: 0.5em;
 }
 </style>
