@@ -1,7 +1,7 @@
 # Heist.net - Service Project
 This is my service project that I call Heist.net. In this project I made a webapplication that provides a service, which in this case is providing users with heists that users can view and choose to participate in. It is heavely inspired by crime.net from the game Payday 2 and there are many similarities between this project and the games system.
 
-For this project I used Visual Studio Code (VS Code) as IDE, the languages I used are JavaScript, HTML and CSS, and the framework I used is VueJS.
+For this project I used Visual Studio Code (VS Code) as IDE, the languages I used are JavaScript, HTML and CSS, and the framework I used is VueJS. As runtime environment I use NodeJS.
 
 **NOTE:** *This project is unfinished and have 2 pages that are completely unfinished and a relatively empty homepage. Most of the content can be found on the "Heist" page.*
 
